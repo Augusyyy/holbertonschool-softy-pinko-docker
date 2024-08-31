@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
+        <h1 id="dynamic-content"></h1>
+        <h1>We provide the best <strong>strategy</strong><br>to grow up your<strong>business</strong></h1>
+        <a href="#features" class="main-button-slider">Discover More</a>
+    </div>
+    <script>
+    $(function() {
+        $('.main-button-slider').on('click', function(event) {
+            event.preventDefault(); // 阻止链接的默认行为
+            $.ajax({
+                type: "GET",
+                url: "/api/hello",
+                success: function(data) {
+                    console.log(data);
+                    $('#dynamic-content').text(data);
+                },
+                error: function() {
+                    console.log("Error loading data.");
+                    $('#dynamic-content').text("Failed to load data!");
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
